@@ -11,6 +11,7 @@ This example demonstrates:
 * A Maven build that puts it all together
 
 ## Running the tests
+#
 
 * To Check the Tests
 * To run the unit tests, call `mvn test`
