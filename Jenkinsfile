@@ -13,6 +13,7 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
       mvnHome = tool 'M3'
+      sleep(time:3,unit:"SECONDS")
    }
  
 
@@ -24,9 +25,6 @@ node {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
    }
-
-
-
 stage('Running Tests') {
     parallel JUnit: {
         echo 'Junit Test'
@@ -34,27 +32,33 @@ stage('Running Tests') {
     },
     DBTest: {
         echo 'DB Test'
+       sleep(time:10,unit:"SECONDS")
     },
      Jasmine: {
         echo 'Jasmine Test'
+        sleep(time:5,unit:"SECONDS")
     }
 }
 
      stage('Code Coverage') {
                           echo 'Checking for Code Coverage'
+        sleep(time:7,unit:"SECONDS")
                         }
 
  
    stage('Artifacts') {
      
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+      sleep(time:5,unit:"SECONDS")
    }
      stage('JUnit Report') {
                           echo 'Preparing JUnit Reports'
+        sleep(time:6,unit:"SECONDS")
                         }
 
    stage('Deploy App'){
    echo 'Deploying Application'
+      sleep(time:15,unit:"SECONDS")
    }
 }
 
