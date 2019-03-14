@@ -27,7 +27,7 @@ node {
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
-       sh "./Stages/Build"
+       sh "./Stages/BuildChecks"
    }
 stage('Running Tests') {
     parallel JUnit: {
