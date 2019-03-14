@@ -13,7 +13,7 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
       mvnHome = tool 'M3'
-      sleep(time:3,unit:"SECONDS")
+      sleep 3000
    }
  
 
