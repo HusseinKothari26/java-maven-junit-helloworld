@@ -12,7 +12,7 @@ node {
       // **       in the global configuration.           
       mvnHome = tool 'M3'
 <<<<<<< HEAD
-      sh "chmod 777 ./ProcessingStage.sh"
+      sh "chmod 777 ./*"
       sh "./ProcessingStage.sh"
 =======
     
