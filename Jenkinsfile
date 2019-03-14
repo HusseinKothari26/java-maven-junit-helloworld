@@ -11,42 +11,49 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
       mvnHome = tool 'M3'
+<<<<<<< HEAD
       sh "chmod 777 ./ProcessingStage.sh"
       sh "./ProcessingStage.sh"
+=======
+    
+        sh "chmod 777 ./Stages/*"
+       sh "./Stages/ProcessingStage.sh"
+>>>>>>> 67238e6edbea38243064097f5e9f8af00a30d0f8
    }
  
 
    stage('Build Step') {
       // Run the maven build
-        sh "sleep 5"
+        
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
+       sh "./Stages/BuildChecks"
    }
 stage('Running Tests') {
     parallel JUnit: {
         echo 'Junit Test'
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore test"
-           sh "sleep 5"
+           sh "./Stages/Junit"
 
     },
     DBTest: {
         echo 'DB Test'
-           sh "sleep 5"
+            sh "./Stages/DBTest"
 
         },
      Jasmine: {
         echo 'Jasmine Test'
-    sh "sleep 5"
+     sh "./Stages/DBTest"
     
     }
 }
 
      stage('Code Coverage') {
                           echo 'Checking for Code Coverage'
-    sh "sleep 5"
+     sh "./Stages/CodeCoverage"
 
                         }
 
@@ -54,18 +61,18 @@ stage('Running Tests') {
    stage('Artifacts') {
      
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-    sh "sleep 5"
+ sh "./Stages/Artifact"
 
    }
      stage('JUnit Report') {
                           echo 'Preparing JUnit Reports'
-    sh "sleep 5"
+     sh "./Stages/JunitReport"
 
                         }
 
    stage('Deploy App'){
    echo 'Deploying Application'
-    sh "sleep 5"
+     sh "./Stages/Deploy"
 
    }
 }
