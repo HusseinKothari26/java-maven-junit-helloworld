@@ -14,7 +14,7 @@ node {
       // **       in the global configuration.           
       mvnHome = tool 'M3'
     
-        sh "sleep 5"
+        sh "./ProcessingStage.sh"
    }
  
 
