@@ -13,7 +13,7 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
       mvnHome = tool 'M3'
-      sleep 10000
+    
         sh "sleep 5"
    }
  
@@ -31,36 +31,44 @@ stage('Running Tests') {
     parallel JUnit: {
         echo 'Junit Test'
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore test"
+           sh "sleep 5"
+
     },
     DBTest: {
         echo 'DB Test'
-       sleep 10000
-    },
+           sh "sleep 5"
+
+        },
      Jasmine: {
         echo 'Jasmine Test'
-        sleep 10000
+    sh "sleep 5"
+    
     }
 }
 
      stage('Code Coverage') {
                           echo 'Checking for Code Coverage'
-        sleep 10000
+    sh "sleep 5"
+
                         }
 
  
    stage('Artifacts') {
      
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-      sleep 10000
+    sh "sleep 5"
+
    }
      stage('JUnit Report') {
                           echo 'Preparing JUnit Reports'
-        sleep 10000
+    sh "sleep 5"
+
                         }
 
    stage('Deploy App'){
    echo 'Deploying Application'
-      sleep 10000
+    sh "sleep 5"
+
    }
 }
 
