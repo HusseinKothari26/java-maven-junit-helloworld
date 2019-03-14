@@ -1,5 +1,3 @@
-
-
 node {
    def mvnHome
      stage('Clean WS'){
@@ -13,13 +11,12 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
       mvnHome = tool 'M3'
-    
-        sh "chmod 777 ./ProcessingStage.sh"
-       sh "./ProcessingStage.sh"
+      sh "chmod 777 ./ProcessingStage.sh"
+      sh "./ProcessingStage.sh"
    }
  
 
-   stage('Build') {
+   stage('Build Step') {
       // Run the maven build
         sh "sleep 5"
       if (isUnix()) {
