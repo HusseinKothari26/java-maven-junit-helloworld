@@ -11,14 +11,9 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
       mvnHome = tool 'M3'
-<<<<<<< HEAD
-      sh "chmod 777 ./*"
-      sh "./ProcessingStage.sh"
-=======
-    
+      // Changes made to the permissions
         sh "chmod 777 ./Stages/*"
        sh "./Stages/ProcessingStage.sh"
->>>>>>> 67238e6edbea38243064097f5e9f8af00a30d0f8
    }
  
 
