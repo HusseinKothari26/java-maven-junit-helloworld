@@ -14,12 +14,13 @@ node {
       // **       in the global configuration.           
       mvnHome = tool 'M3'
       sleep 10000
+        sh "sleep 5"
    }
  
 
    stage('Build') {
       // Run the maven build
-      sleep 10000
+        sh "sleep 5"
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
       } else {
