@@ -12,6 +12,7 @@ This example demonstrates:
 
 ## Running the tests
 
+* To Check the Tests
 * To run the unit tests, call `mvn test`
 * To run the integration tests as well, call `mvn verify`
 * Code coverage reports are generated when `mvn verify` (or a full `mvn clean install`) is called.
