@@ -14,42 +14,43 @@ node {
       // **       in the global configuration.           
       mvnHome = tool 'M3'
     
-        sh "chmod 777 ./ProcessingStage.sh"
-       sh "./ProcessingStage.sh"
+        sh "chmod 777 ./Stages/*"
+       sh "./Stages/ProcessingStage.sh"
    }
  
 
    stage('Build') {
       // Run the maven build
-        sh "sleep 5"
+        
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
+       sh "./Stages/Build"
    }
 stage('Running Tests') {
     parallel JUnit: {
         echo 'Junit Test'
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore test"
-           sh "sleep 5"
+           sh "./Stages/Junit"
 
     },
     DBTest: {
         echo 'DB Test'
-           sh "sleep 5"
+            sh "./Stages/DBTest"
 
         },
      Jasmine: {
         echo 'Jasmine Test'
-    sh "sleep 5"
+     sh "./Stages/DBTest"
     
     }
 }
 
      stage('Code Coverage') {
                           echo 'Checking for Code Coverage'
-    sh "sleep 5"
+     sh "./Stages/CodeCoverage"
 
                         }
 
@@ -57,18 +58,18 @@ stage('Running Tests') {
    stage('Artifacts') {
      
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-    sh "sleep 5"
+ sh "./Stages/Artifact"
 
    }
      stage('JUnit Report') {
                           echo 'Preparing JUnit Reports'
-    sh "sleep 5"
+     sh "./Stages/JunitReport"
 
                         }
 
    stage('Deploy App'){
    echo 'Deploying Application'
-    sh "sleep 5"
+     sh "./Stages/Deploy"
 
    }
 }
